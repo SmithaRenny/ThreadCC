@@ -32,6 +32,10 @@ void SerialApplyFoo( float a[], size_t n ) {
 
 **`map`'ed `for`-loop - good!**
 
+## Why not include library libawesome?!11!
+
+Because it's probably too big and/or requires an SDK to run. Future additions will include source-only libs like linenoise (to nuke readline), [NanoCL](https://github.com/turbo/NanoCL) and others.
+
 ```cpp
 #include "tbb/tbb.h"
 
