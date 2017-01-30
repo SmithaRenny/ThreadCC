@@ -15,3 +15,31 @@ I need the same GCC environment on all my Windows PCs without going crazy. I hat
 
 Now you can use gcc, g++, gdb and make as ordinary commands. It launches in powershell, so you get at least some unix aliases (`ls` etc).
 
+## TBB?
+
+In short it's an awesome library for building parallel applications. It provides such amazing things as maps, concurrent hashtables and vectors (read: thread-safe), parallel forms of other loops, automatic task scheduling and much more. Use it if you can. The included build is static and you don't need to ship any DLLs or other runtime with it.
+
+### Example
+
+**`for`-loop - bad!**
+
+```cpp
+void SerialApplyFoo( float a[], size_t n ) {
+    for( size_t i=0; i!=n; ++i )
+        Foo(a[i]);
+}
+```
+
+**`map`'ed `for`-loop - good!**
+
+```cpp
+#include "tbb/tbb.h"
+
+using namespace tbb;
+
+void ParallelApplyFoo( float a[], size_t n ) {
+    tbb::parallel_for( size_t(0), n, [&]( size_t i ) {
+        Foo(a[i]);
+    } );
+}
+```
